@@ -2,26 +2,28 @@ package com.florenceconsulting.scardamone.Exercise1API_spring_docker.Service.Imp
 
 
 
-import com.florenceconsulting.scardamone.Exercise1API_spring_docker.Common.DTOtoEntity;
-import com.florenceconsulting.scardamone.Exercise1API_spring_docker.Controller.DTO.MedieDTO;
-import com.florenceconsulting.scardamone.Exercise1API_spring_docker.Repository.MedieRepository;
+import com.florenceconsulting.scardamone.Exercise1API_spring_docker.Common.Converter.DTOtoEntity;
+import com.florenceconsulting.scardamone.Exercise1API_spring_docker.Common.DTO.AverageDTO;
+import com.florenceconsulting.scardamone.Exercise1API_spring_docker.Repository.AverageRepository;
 import com.florenceconsulting.scardamone.Exercise1API_spring_docker.Service.Interface.IValueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class AvarageService implements IValueService<MedieDTO> {
+public class AvarageService implements IValueService<AverageDTO> {
 
-    private MedieRepository medieRepository;
+    private final AverageRepository AverageRepository;
 
     @Autowired
-    public AvarageService(MedieRepository medieRepository) {
-        this.medieRepository = medieRepository;
+    public AvarageService(AverageRepository AverageRepository) {
+        this.AverageRepository = AverageRepository;
     }
 
     @Override
-    public void Add (MedieDTO medieDTO){
-        medieRepository.save(DTOtoEntity.cast(medieDTO));
+    public ResponseEntity<AverageDTO> Add (AverageDTO AverageDTO){
+        return new ResponseEntity<>(DTOtoEntity.cast(AverageRepository.save(DTOtoEntity.cast(AverageDTO))), HttpStatus.CREATED);
     }
 }

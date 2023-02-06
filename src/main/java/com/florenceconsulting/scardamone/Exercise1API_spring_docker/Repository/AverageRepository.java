@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MedieRepository extends JpaRepository<Medie, String> {
+public interface AverageRepository extends JpaRepository<Medie, String> {
 }
